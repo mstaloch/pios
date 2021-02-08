@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <list.h>
+
+struct list_element {
+	struct list_element *next;
+	int data;
+};
+
+void list_add(struct list_element *head_element, int data){
+	struct list_element *current = head_element;
+	while (current->next != NULL){
+		current = current->next;
+	}
+
+	current->next->data = data;
+	return;
+}
+void list_remove(struct list_element *head_element, int data){
+	struct list_element *current = head_element;
+	while(current->data != data){
+		current = current->next;
+	}
+
+	while(current->next != NULL){
+		current->data = current->next->data;
+		current = current->next;
+	}
+	return;
+}
+
