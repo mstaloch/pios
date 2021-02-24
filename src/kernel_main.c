@@ -11,9 +11,13 @@ void clear_bss(){
 	}
 }
 
+unsigned long get_timer_count(){
+	unsigned long *timer_count_register =  0xfe003004;
+	return *timer_count_register;
+}
 
 void kernel_main() {
-
     while(1){
+	led_init();
     }
 }
