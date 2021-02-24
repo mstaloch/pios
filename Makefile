@@ -16,7 +16,7 @@ OBJS = \
 	boot.o \
 	kernel_main.o \
 	list.o \
-
+	led.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
