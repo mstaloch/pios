@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "rprintf.h"
+#include "serial.h"
 
 extern long __bss_start;
 extern long __bss_end;
@@ -17,7 +19,7 @@ unsigned long get_timer_count(){
 }
 
 void kernel_main() {
+	esp_printf(putc, "Current Execution Level is %d\r\n", getEL());
     while(1){
-	led_init();
-    }
+	    }
 }
