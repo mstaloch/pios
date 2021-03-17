@@ -1,5 +1,7 @@
 #include "serial.h"
+#include <stdint.h>
+#define MUIO 0x3F215040;
 void putc(int data){
-	int *muio = (int *)0x3F215040;
+	uint32_t *muio = (uint32_t *)MUIO;
 	*muio = data;
 }

@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include "led.h"
 
-unsigned int *gpset1 = 0xFE200020;
-unsigned int *gpsel4 = 0xFE200010;
-unsigned int *gpclr1 = 0xFE20002C;
+unsigned int *gpset1 = (unsigned int *)0xFE200020;
+unsigned int *gpsel4 = (unsigned int *)0xFE200010;
+unsigned int *gpclr1 = (unsigned int *)0xFE20002C;
 
 
 
@@ -23,7 +23,6 @@ void led_off(){
 }
 
 void delay(){
-	unsigned int i = 0;
 	for(int i=0; i< 100000; i++){
 		asm("NOP");
 	}

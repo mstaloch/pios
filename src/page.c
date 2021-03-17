@@ -3,17 +3,20 @@
 
 #define NULL (void*)0
 #define NPAGES 128
+extern int __end;
+
 
 struct ppage physical_page_array[NPAGES];
 struct ppage* free_list = NULL;
+
 
 void init_pfa_list(void){
 	void* address_p = (((unsigned long)&__end) & ~(0x200000 -1)) + 0x200000;
 	int i;
 	for(i = 0; i < NPAGES; i++){
 		listAdd(&free_list, &physical_page_array[i]);
-		physical_page_array[i].physical_addr = physical_addr;
-		physical_addr += 0x200000; 
+		physical_page_array[i].physical_addr = address_p;
+		address_p += 0x200000; 
 	}
 }
 

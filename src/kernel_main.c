@@ -1,9 +1,13 @@
-#include <stdio.h>
+#include <stdint.h>
 #include "rprintf.h"
 #include "serial.h"
+#include "page.h"
+#include "list.h"
 
 extern long __bss_start;
 extern long __bss_end;
+
+extern struct ppage* free_list;//for HW 7
 
 void clear_bss(){
 	int x=0;
@@ -13,13 +17,18 @@ void clear_bss(){
 	}
 }
 
-unsigned long get_timer_count(){
-	unsigned long *timer_count_register =  0xfe003004;
-	return *timer_count_register;
-}
-
 void kernel_main() {
-	esp_printf(putc, "Current Execution Level is %d\r\n", getEL());
-    while(1){
+
+	init_pfa_list();
+
+	struct ppage* test = free_list->next;
+	esp_printf(putc, "Physical addr: %x \n", test->physical_addr);
+	test = allocate_physical_pages(2);
+	esp_printf(putc, "Physical addr (test) after npages: %x \n", test);
+	esp_printf(putc, "Physical addr (->physical_addr) after npages: %x \n", test->physical_addr);
+	free_physical_pages(test);
+	test = free_list->next;
+	esp_printf(putc, "Post free addr: %x \n", test->physical_addr);	
+	while(1){
 	    }
 }

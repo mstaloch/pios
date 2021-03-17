@@ -1,15 +1,11 @@
-#ifndef LIST_H
-#define LIST_H
-struct list_element {
-	struct list_element *next;
-	struct list_element *prev;
-	int data;
+#ifndef __LIST_H
+#define __LIST_H
+
+struct listElement {
+    struct listElement *next;
+    struct listElement *prev;
 };
 
-typedef struct list_element list_element;
-
-void list_add(list_element *head_element, list_element *add_element);
-
-void list_remove(list_element *head_element, list_element *remove_element);
-
+void listAdd(struct listElement **head, struct listElement *newElement);
+void listRemove(struct listElement *b);
 #endif 

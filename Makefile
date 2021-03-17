@@ -1,12 +1,10 @@
-
-
 CC := gcc
 LD := ld
 OBJDUMP := objdump
 OBJCOPY := objcopy
 CONFIGS := -DCONFIG_HEAP_SIZE=4096
 
-CFLAGS := -O0 -ffreestanding -fno-pie -fno-stack-protector -g3 -mcpu=cortex-a53+nofp -Wall $(CONFIGS)
+CFLAGS := -O0 -ffreestanding -fno-pie -fno-stack-protector -g3 -mcpu=cortex-a53+nofp -Wall -mgeneral-regs-only $(CONFIGS)
 
 
 ODIR = obj
@@ -17,6 +15,12 @@ OBJS = \
 	kernel_main.o \
 	list.o \
 	led.o \
+	serial.o \
+	rprintf.o \
+	page.o \
+
+
+
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
@@ -60,4 +64,3 @@ rootfs.img:
 	sudo mkdir /mnt/disk/bin
 	sudo mkdir /mnt/disk/etc
 	sudo umount /mnt/disk
-
